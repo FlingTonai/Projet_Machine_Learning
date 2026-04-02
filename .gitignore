@@ -1,9 +1,6 @@
 # Environnement virtuel
 venv/
 
-# Données (trop lourdes pour GitHub)
-data/
-
 # Python
 __pycache__/
 *.pyc
