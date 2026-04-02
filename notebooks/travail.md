@@ -7,8 +7,8 @@
 - Membre 1 : ...
 - Membre 2 : ...
 - Membre 3 : ...
-- Groupe Moodle : ...
-- Modèle assigné : ...
+- Groupe Moodle : **Groupe 3**
+- Modèle assigné : **Principal Component Regression (PCR)**
 
 ---
 
@@ -50,27 +50,28 @@
 
 ---
 
-### 4. 🤖 Modèle 1 — Modèle assigné (...)
-- [ ] Implémentation
+### 4. 🤖 Modèle 1 — Principal Component Regression (PCR)
+- [ ] Implémentation (PCA + Régression linéaire)
+- [ ] Choix du nombre de composantes principales
 - [ ] Cross-validation
 - [ ] Tuning des hyperparamètres
 - [ ] Évaluation (RMSE)
 
-**Motivation :** ...
+**Motivation :** Modèle assigné par les professeurs. La PCR est utile quand les features sont nombreuses et corrélées entre elles (multicolinéarité). Elle réduit la dimensionnalité via PCA avant d'appliquer une régression linéaire.
 
-**Fichier :** `notebooks/03_model1.ipynb`
+**Fichier :** `notebooks/03_model_PCR.ipynb`
 
 ---
 
-### 5. 🤖 Modèle 2 — Modèle au choix (...)
+### 5. 🤖 Modèle 2 — XGBoost (au choix)
 - [ ] Implémentation
 - [ ] Cross-validation
-- [ ] Tuning des hyperparamètres
+- [ ] Tuning des hyperparamètres (n_estimators, max_depth, learning_rate...)
 - [ ] Évaluation (RMSE)
 
-**Motivation :** ...
+**Motivation :** XGBoost est un algorithme de gradient boosting très performant sur les données tabulaires. Il gère bien les valeurs manquantes, les relations non-linéaires et est souvent très compétitif sur ce type de compétition Kaggle.
 
-**Fichier :** `notebooks/04_model2.ipynb`
+**Fichier :** `notebooks/04_model_XGBoost.ipynb`
 
 ---
 
