@@ -25,32 +25,26 @@
 
 ---
 
-### 2. 📊 Exploratory Data Analysis (EDA)
-- [ ] Chargement de tous les datasets
-- [ ] Exploration de la structure (dimensions, colonnes, types)
-- [ ] Analyse des valeurs manquantes
-- [ ] Visualisation de la variable cible `Ja in Prozent`
+### 2. 📊 EDA + Preprocessing (fusionnés)
+- [x] Chargement de tous les datasets
+- [x] Exploration de la structure (dimensions, colonnes, types)
+- [x] Visualisation de la variable cible `Ja in Prozent`
+- [ ] Exploration + nettoyage du dataset Train
+- [ ] Exploration + nettoyage du dataset Demo
+- [ ] Exploration + nettoyage du dataset Revenus
+- [ ] Exploration + nettoyage du dataset Géo
+- [ ] Exploration + nettoyage du dataset Réf. précédent
+- [ ] Merge de tous les datasets
 - [ ] Analyse des corrélations
-- [ ] Détection d'anomalies / outliers
-- [ ] Fusion des datasets
+- [ ] Sauvegarde du dataset final propre
+
+**Décision :** EDA et Preprocessing fusionnés dans un seul notebook pour plus de clarté et de simplicité. Chaque dataset est exploré puis nettoyé directement.
 
 **Fichier :** `notebooks/01_EDA.ipynb`
 
 ---
 
-### 3. 🔧 Preprocessing
-- [ ] Nettoyage des données
-- [ ] Gestion des valeurs manquantes
-- [ ] Feature engineering
-- [ ] Encodage des variables catégorielles
-- [ ] Normalisation / standardisation
-- [ ] Séparation train/validation
-
-**Fichier :** `notebooks/02_preprocessing.ipynb` ou `src/preprocessing.py`
-
----
-
-### 4. 🤖 Modèle 1 — Principal Component Regression (PCR)
+### 3. 🤖 Modèle 1 — Principal Component Regression (PCR)
 - [ ] Implémentation (PCA + Régression linéaire)
 - [ ] Choix du nombre de composantes principales
 - [ ] Cross-validation
@@ -59,11 +53,11 @@
 
 **Motivation :** Modèle assigné par les professeurs. La PCR est utile quand les features sont nombreuses et corrélées entre elles (multicolinéarité). Elle réduit la dimensionnalité via PCA avant d'appliquer une régression linéaire.
 
-**Fichier :** `notebooks/03_model_PCR.ipynb`
+**Fichier :** `notebooks/02_model_PCR.ipynb`
 
 ---
 
-### 5. 🤖 Modèle 2 — XGBoost (au choix)
+### 4. 🤖 Modèle 2 — XGBoost (au choix)
 - [ ] Implémentation
 - [ ] Cross-validation
 - [ ] Tuning des hyperparamètres (n_estimators, max_depth, learning_rate...)
@@ -71,11 +65,11 @@
 
 **Motivation :** XGBoost est un algorithme de gradient boosting très performant sur les données tabulaires. Il gère bien les valeurs manquantes, les relations non-linéaires et est souvent très compétitif sur ce type de compétition Kaggle.
 
-**Fichier :** `notebooks/04_model_XGBoost.ipynb`
+**Fichier :** `notebooks/03_model_XGBoost.ipynb`
 
 ---
 
-### 6. 📤 Soumissions Kaggle
+### 5. 📤 Soumissions Kaggle
 - [ ] Première soumission (baseline)
 - [ ] Soumissions itératives
 - [ ] Meilleur score obtenu : ...
@@ -84,7 +78,7 @@
 
 ---
 
-### 7. 📝 Rapport LaTeX
+### 6. 📝 Rapport LaTeX
 - [ ] Section 1 : Organisation du code
 - [ ] Section 2 : EDA
 - [ ] Section 3 : Méthodologie
@@ -94,7 +88,7 @@
 
 ---
 
-### 8. 🎤 Présentation orale
+### 7. 🎤 Présentation orale
 - [ ] Slides créées (PDF)
 - [ ] Répartition de la parole entre les membres
 - [ ] Présentation le 11 ou 12 mai
@@ -123,7 +117,32 @@
 
 ---
 
-## 💡 Notes & Décisions
-*(Cette section sera complétée au fur et à mesure)*
+## 👤 Répartition du travail
 
-- ...
+### Membre 1 (toi) — EDA & Modèle XGBoost
+- Mise en place du projet (GitHub, environnement) ✅
+- EDA + nettoyage + merge (`01_EDA.ipynb`)
+- Implémentation et tuning du modèle XGBoost (`03_model_XGBoost.ipynb`)
+- Soumissions Kaggle
+- Rédaction section **Results & Discussion** du rapport
+
+### Membre 2 — Rapport LaTeX
+- Rédaction sections **EDA** et **Code organization** du rapport
+- Mise en forme LaTeX du rapport complet
+- Relecture et corrections
+
+### Membre 3 — Modèle PCR & Présentation
+- Implémentation et tuning du modèle PCR (`02_model_PCR.ipynb`)
+- Rédaction section **Methodology** du rapport
+- Préparation et coordination des slides (PDF)
+- Coordination de la présentation orale
+
+---
+
+## 💡 Notes & Décisions
+
+- **EDA + Preprocessing fusionnés** dans `01_EDA.ipynb` — plus simple et logique pour ce projet
+- **Suppression de `02_preprocessing.ipynb`** — devenu inutile
+- **Notebooks renommés** : `02_model_PCR.ipynb` et `03_model_XGBoost.ipynb`
+- **Leakage identifié dans Train** : colonnes à supprimer → `Ja-Stimmen`, `Nein-Stimmen`, `gültige Stimmen`, `eingelegte Stimmzettel`, `leere Stimmzettel`, `ungültige Stimmzettel`, `Stimmbeteiligung`
+- **Problèmes identifiés dans Demo** : 3 premières lignes = métadonnées, colonnes object à convertir, colonnes dupliquées
