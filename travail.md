@@ -1,9 +1,9 @@
-# 📋 Plan de travail — Projet Machine Learning 2026
+#  Plan de travail — Projet Machine Learning 2026
 **UMONS | Prédiction du vote "Initiative Vache à Cornes" (2018)**
 
 ---
 
-## 👥 Équipe
+## Équipe
 - Membre 1 : ...
 - Membre 2 : ...
 - Membre 3 : ...
@@ -12,7 +12,7 @@
 
 ---
 
-## ✅ Avancement
+## Avancement
 
 ### 1. 🛠️ Mise en place du projet
 - [x] Création de l'environnement virtuel Python (venv)
@@ -25,18 +25,18 @@
 
 ---
 
-### 2. 📊 EDA + Preprocessing (fusionnés)
+### 2. EDA + Preprocessing (fusionnés)
 - [x] Chargement de tous les datasets
 - [x] Exploration de la structure (dimensions, colonnes, types)
 - [x] Visualisation de la variable cible `Ja in Prozent`
-- [ ] Exploration + nettoyage du dataset Train
-- [ ] Exploration + nettoyage du dataset Demo
-- [ ] Exploration + nettoyage du dataset Revenus
-- [ ] Exploration + nettoyage du dataset Géo
-- [ ] Exploration + nettoyage du dataset Réf. précédent
-- [ ] Merge de tous les datasets
-- [ ] Analyse des corrélations
-- [ ] Sauvegarde du dataset final propre
+- [x] Exploration + nettoyage du dataset Train
+- [x] Exploration + nettoyage du dataset Demo
+- [x] Exploration + nettoyage du dataset Revenus
+- [x] Exploration + nettoyage du dataset Géo
+- [x] Exploration + nettoyage du dataset Réf. précédent
+- [x] Merge de tous les datasets
+- [x] Analyse des corrélations
+- [x] Sauvegarde du dataset final propre
 
 **Décision :** EDA et Preprocessing fusionnés dans un seul notebook pour plus de clarté et de simplicité. Chaque dataset est exploré puis nettoyé directement.
 
@@ -44,20 +44,25 @@
 
 ---
 
-### 3. 🤖 Modèle 1 — Principal Component Regression (PCR)
-- [ ] Implémentation (PCA + Régression linéaire)
-- [ ] Choix du nombre de composantes principales
-- [ ] Cross-validation
-- [ ] Tuning des hyperparamètres
-- [ ] Évaluation (RMSE)
+### 3. Modèle 1 — Principal Component Regression (PCR)
+- [x] Implémentation (PCA + Régression linéaire)
+- [x] Choix du nombre de composantes principales (optimisé via cross-validation)
+- [x] Cross-validation (5 folds)
+- [x] Tuning des hyperparamètres (n_components=69)
+- [x] Évaluation (RMSE)
 
 **Motivation :** Modèle assigné par les professeurs. La PCR est utile quand les features sont nombreuses et corrélées entre elles (multicolinéarité). Elle réduit la dimensionnalité via PCA avant d'appliquer une régression linéaire.
+
+**Résultats :**
+- RMSE cross-validation : 6.3851
+- RMSE train complet : 5.9547
+- Meilleur n_components : 69
 
 **Fichier :** `notebooks/02_model_PCR.ipynb`
 
 ---
 
-### 4. 🤖 Modèle 2 — XGBoost (au choix)
+### 4. Modèle 2 — XGBoost (au choix)
 - [ ] Implémentation
 - [ ] Cross-validation
 - [ ] Tuning des hyperparamètres (n_estimators, max_depth, learning_rate...)
@@ -69,8 +74,8 @@
 
 ---
 
-### 5. 📤 Soumissions Kaggle
-- [ ] Première soumission (baseline)
+### 5.  Soumissions Kaggle
+- [x] Première soumission PCR (submission_PCR_v1.csv)
 - [ ] Soumissions itératives
 - [ ] Meilleur score obtenu : ...
 
@@ -78,7 +83,7 @@
 
 ---
 
-### 6. 📝 Rapport LaTeX
+### 6.  Rapport LaTeX
 - [ ] Section 1 : Organisation du code
 - [ ] Section 2 : EDA
 - [ ] Section 3 : Méthodologie
@@ -95,7 +100,7 @@
 
 ---
 
-## 📅 Deadlines
+## 📅Deadlines
 | Date | Quoi | Statut |
 |------|------|--------|
 | 31 mars 2026 | Équipe formée sur Moodle | ✅ |
@@ -105,7 +110,7 @@
 
 ---
 
-## 📦 Datasets utilisés
+##  Datasets utilisés
 | Fichier | Contenu | Source |
 |--------|---------|--------|
 | `results_train.xlsx` | Résultats référendum (70% communes) | swissvotes.ch |
@@ -117,10 +122,10 @@
 
 ---
 
-## 👤 Répartition du travail
+##  Répartition du travail
 
 ### Membre 1 (toi) — EDA & Modèle XGBoost
-- Mise en place du projet (GitHub, environnement) ✅
+- Mise en place du projet (GitHub, environnement) 
 - EDA + nettoyage + merge (`01_EDA.ipynb`)
 - Implémentation et tuning du modèle XGBoost (`03_model_XGBoost.ipynb`)
 - Soumissions Kaggle
@@ -139,10 +144,19 @@
 
 ---
 
-## 💡 Notes & Décisions
+##  Notes & Décisions
 
 - **EDA + Preprocessing fusionnés** dans `01_EDA.ipynb` — plus simple et logique pour ce projet
 - **Suppression de `02_preprocessing.ipynb`** — devenu inutile
 - **Notebooks renommés** : `02_model_PCR.ipynb` et `03_model_XGBoost.ipynb`
-- **Leakage identifié dans Train** : colonnes à supprimer → `Ja-Stimmen`, `Nein-Stimmen`, `gültige Stimmen`, `eingelegte Stimmzettel`, `leere Stimmzettel`, `ungültige Stimmzettel`, `Stimmbeteiligung`
-- **Problèmes identifiés dans Demo** : 3 premières lignes = métadonnées, colonnes object à convertir, colonnes dupliquées
+- **Leakage identifié dans Train** : colonnes supprimées → `Ja-Stimmen`, `Nein-Stimmen`, `gültige Stimmen`, `eingelegte Stimmzettel`, `leere Stimmzettel`, `ungültige Stimmzettel`, `Stimmbeteiligung`
+- **Problèmes résolus dans Demo** : 3 premières lignes = métadonnées supprimées, colonnes `.1` renommées (`Primary/Secondary/Tertiary sector establishments`)
+- **Doublons dans Geo** : 180 doublons supprimés (coordonnées identiques)
+- **Valeurs manquantes** : gérées avec `SimpleImputer` dans les notebooks des modèles
+- **Dataset final** : 1559 lignes × 67 colonnes (train), 669 lignes × 66 colonnes (test)
+- **Features les plus corrélées avec Ja in Prozent** :
+  - Positive : `65 years or over` (0.40), `Unproductive area in %` (0.36), `Small right-wing parties` (0.31)
+  - Négative : `Agricultural area in %` (-0.62), `0-19 years` (-0.45), `Size of households in persons` (-0.44)
+- **PCR** : meilleur n_components = 69, RMSE CV = 6.3851, RMSE train = 5.9547
+- **One Hot Encoding** appliqué sur `Kanton` (26 colonnes) — `Gemeinde` supprimée (cardinalité trop élevée)
+- **Kantons-Nummer** supprimé (redondant avec One Hot Encoding de Kanton)
