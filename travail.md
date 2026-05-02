@@ -22,6 +22,8 @@
 - [x] Datasets téléchargés depuis Kaggle et pushés sur GitHub
 - [x] Fichier .gitignore configuré
 - [x] requirements.txt généré
+- [x] `src/utils.py` créé avec fonctions utilitaires réutilisables
+- [x] Notebooks refactorisés pour utiliser `utils.py`
 
 ---
 
@@ -132,11 +134,12 @@
 
 ## 👤 Répartition du travail
 
-### Membre 1 (toi) — EDA & Modèle XGBoost
+### Membre 1 (toi) — EDA, Modèles & Code
 - Mise en place du projet (GitHub, environnement) ✅
-- EDA + nettoyage + merge (`01_EDA.ipynb`)
-- Implémentation et tuning du modèle XGBoost (`03_model_XGBoost.ipynb`)
-- Soumissions Kaggle
+- EDA + nettoyage + merge (`01_EDA.ipynb`) ✅
+- Implémentation et tuning du modèle Random Forest (`03_model_RandomForest.ipynb`) ✅
+- Refactorisation des notebooks avec `src/utils.py` ✅
+- Soumissions Kaggle ✅
 - Rédaction section **Results & Discussion** du rapport
 
 ### Membre 2 — Rapport LaTeX
@@ -145,7 +148,7 @@
 - Relecture et corrections
 
 ### Membre 3 — Modèle PCR & Présentation
-- Implémentation et tuning du modèle PCR (`02_model_PCR.ipynb`)
+- Implémentation et tuning du modèle PCR (`02_model_PCR.ipynb`) ✅
 - Rédaction section **Methodology** du rapport
 - Préparation et coordination des slides (PDF)
 - Coordination de la présentation orale
@@ -165,7 +168,8 @@
 - **Features les plus corrélées avec Ja in Prozent** :
   - Positive : `65 years or over` (0.40), `Unproductive area in %` (0.36), `Small right-wing parties` (0.31)
   - Négative : `Agricultural area in %` (-0.62), `0-19 years` (-0.45), `Size of households in persons` (-0.44)
+- **Refactorisation** : notebooks refactorisés pour utiliser `src/utils.py` → `compute_rmse`, `print_cv_results`, `create_submission`
 - **PCR** : meilleur n_components = 69, RMSE CV = 6.3851, RMSE train = 5.9547, RMSE Kaggle = 6.0280
-- **Random Forest** : RMSE CV = 6.2370, RMSE train = 2.2691 (overfitting), RMSE Kaggle = 6.4695
+- **Random Forest** : RMSE CV = 6.2370, RMSE train = 2.6276 (overfitting), RMSE Kaggle = 6.4695
 - **Conclusion** : PCR généralise mieux malgré un RMSE CV légèrement inférieur à RF → les relations dans les données sont majoritairement linéaires
 - **Soumission finale** : PCR (RMSE Kaggle = 6.0280)
