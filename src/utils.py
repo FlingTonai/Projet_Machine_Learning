@@ -78,6 +78,6 @@ def create_submission(commune_ids, y_pred, filename="../submissions/submission.c
 
     # Sauvegarde en CSV
     submission.to_csv(filename, index=False)
-    print(f"Soumission créée : {filename} ({len(submission)} lignes)")
+    print(f" Soumission créée : {filename} ({len(submission)} lignes)")
 
     return submission
