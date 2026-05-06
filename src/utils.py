@@ -9,8 +9,8 @@
 #   - print_cv_results()    : affiche les résultats de cross-validation
 #   - create_submission()   : crée le fichier de soumission Kaggle
 #
-#
-# Auteurs : Groupe 3 — UMONS 2025-2026
+# Ces fonctions permettent de standardiser les évaluations et la création
+# des soumissions, et d'éviter la duplication de code dans les notebooks.
 # =============================================================================
 
 import numpy as np
