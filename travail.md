@@ -1,9 +1,9 @@
-#  Plan de travail — Projet Machine Learning 2026
+# 📋 Plan de travail — Projet Machine Learning 2026
 **UMONS | Prédiction du vote "Initiative Vache à Cornes" (2018)**
 
 ---
 
-## Équipe
+## 👥 Équipe
 - Membre 1 : ...
 - Membre 2 : ...
 - Membre 3 : ...
@@ -12,7 +12,7 @@
 
 ---
 
-## Avancement
+## ✅ Avancement
 
 ### 1. 🛠️ Mise en place du projet
 - [x] Création de l'environnement virtuel Python (venv)
@@ -22,10 +22,12 @@
 - [x] Datasets téléchargés depuis Kaggle et pushés sur GitHub
 - [x] Fichier .gitignore configuré
 - [x] requirements.txt généré
+- [x] `src/utils.py` créé avec fonctions utilitaires réutilisables
+- [x] Notebooks refactorisés pour utiliser `utils.py`
 
 ---
 
-### 2. EDA + Preprocessing (fusionnés)
+### 2. 📊 EDA + Preprocessing (fusionnés)
 - [x] Chargement de tous les datasets
 - [x] Exploration de la structure (dimensions, colonnes, types)
 - [x] Visualisation de la variable cible `Ja in Prozent`
@@ -44,7 +46,7 @@
 
 ---
 
-### 3. Modèle 1 — Principal Component Regression (PCR)
+### 3. 🤖 Modèle 1 — Principal Component Regression (PCR)
 - [x] Implémentation (PCA + Régression linéaire)
 - [x] Choix du nombre de composantes principales (optimisé via cross-validation)
 - [x] Cross-validation (5 folds)
@@ -62,28 +64,36 @@
 
 ---
 
-### 4. Modèle 2 — XGBoost (au choix)
-- [ ] Implémentation
-- [ ] Cross-validation
-- [ ] Tuning des hyperparamètres (n_estimators, max_depth, learning_rate...)
-- [ ] Évaluation (RMSE)
+### 4. 🤖 Modèle 2 — Random Forest (au choix)
+- [x] Implémentation
+- [x] Cross-validation (5 folds)
+- [x] Tuning des hyperparamètres v1 (GridSearchCV)
+- [x] Tuning des hyperparamètres v2 (correction overfitting)
+- [x] Évaluation (RMSE)
 
-**Motivation :** XGBoost est un algorithme de gradient boosting très performant sur les données tabulaires. Il gère bien les valeurs manquantes, les relations non-linéaires et est souvent très compétitif sur ce type de compétition Kaggle.
+**Motivation :** Random Forest est un algorithme d'ensemble non-linéaire qui combine plusieurs arbres de décision. Choisi pour son contraste avec PCR (linéaire vs non-linéaire) et sa capacité à capturer des relations complexes.
 
-**Fichier :** `notebooks/03_model_XGBoost.ipynb`
+**Résultats :**
+- RMSE cross-validation : 6.2370
+- RMSE train complet : 2.2691 → overfitting identifié
+- RMSE Kaggle : 6.4695
+- Meilleurs hyperparamètres : n_estimators=500, max_depth=15, max_features=0.3, min_samples_split=5
+
+**Fichier :** `notebooks/03_model_RandomForest.ipynb`
 
 ---
 
-### 5.  Soumissions Kaggle
-- [x] Première soumission PCR (submission_PCR_v1.csv)
-- [ ] Soumissions itératives
-- [ ] Meilleur score obtenu : ...
+### 5. 📤 Soumissions Kaggle
+- [x] Soumission PCR (submission_PCR_v1.csv) → Score Kaggle : 6.0280 ✅
+- [x] Soumission Random Forest (submission_RF_v1.csv) → Score Kaggle : 6.4695
+- [ ] Soumissions itératives pour améliorer le score
+- [ ] Meilleur score obtenu : **6.0280 (PCR)** ← soumission finale
 
 **Fichier :** `submissions/`
 
 ---
 
-### 6.  Rapport LaTeX
+### 6. 📝 Rapport LaTeX
 - [ ] Section 1 : Organisation du code
 - [ ] Section 2 : EDA
 - [ ] Section 3 : Méthodologie
@@ -100,7 +110,7 @@
 
 ---
 
-## 📅Deadlines
+## 📅 Deadlines
 | Date | Quoi | Statut |
 |------|------|--------|
 | 31 mars 2026 | Équipe formée sur Moodle | ✅ |
@@ -110,7 +120,7 @@
 
 ---
 
-##  Datasets utilisés
+## 📦 Datasets utilisés
 | Fichier | Contenu | Source |
 |--------|---------|--------|
 | `results_train.xlsx` | Résultats référendum (70% communes) | swissvotes.ch |
@@ -122,13 +132,14 @@
 
 ---
 
-##  Répartition du travail
+## 👤 Répartition du travail
 
-### Membre 1 (toi) — EDA & Modèle XGBoost
-- Mise en place du projet (GitHub, environnement) 
-- EDA + nettoyage + merge (`01_EDA.ipynb`)
-- Implémentation et tuning du modèle XGBoost (`03_model_XGBoost.ipynb`)
-- Soumissions Kaggle
+### Membre 1 (toi) — EDA, Modèles & Code
+- Mise en place du projet (GitHub, environnement) ✅
+- EDA + nettoyage + merge (`01_EDA.ipynb`) ✅
+- Implémentation et tuning du modèle Random Forest (`03_model_RandomForest.ipynb`) ✅
+- Refactorisation des notebooks avec `src/utils.py` ✅
+- Soumissions Kaggle ✅
 - Rédaction section **Results & Discussion** du rapport
 
 ### Membre 2 — Rapport LaTeX
@@ -137,14 +148,14 @@
 - Relecture et corrections
 
 ### Membre 3 — Modèle PCR & Présentation
-- Implémentation et tuning du modèle PCR (`02_model_PCR.ipynb`)
+- Implémentation et tuning du modèle PCR (`02_model_PCR.ipynb`) ✅
 - Rédaction section **Methodology** du rapport
 - Préparation et coordination des slides (PDF)
 - Coordination de la présentation orale
 
 ---
 
-##  Notes & Décisions
+## 💡 Notes & Décisions
 
 - **EDA + Preprocessing fusionnés** dans `01_EDA.ipynb` — plus simple et logique pour ce projet
 - **Suppression de `02_preprocessing.ipynb`** — devenu inutile
@@ -157,6 +168,8 @@
 - **Features les plus corrélées avec Ja in Prozent** :
   - Positive : `65 years or over` (0.40), `Unproductive area in %` (0.36), `Small right-wing parties` (0.31)
   - Négative : `Agricultural area in %` (-0.62), `0-19 years` (-0.45), `Size of households in persons` (-0.44)
-- **PCR** : meilleur n_components = 69, RMSE CV = 6.3851, RMSE train = 5.9547
-- **One Hot Encoding** appliqué sur `Kanton` (26 colonnes) — `Gemeinde` supprimée (cardinalité trop élevée)
-- **Kantons-Nummer** supprimé (redondant avec One Hot Encoding de Kanton)
+- **Refactorisation** : notebooks refactorisés pour utiliser `src/utils.py` → `compute_rmse`, `print_cv_results`, `create_submission`
+- **PCR** : meilleur n_components = 69, RMSE CV = 6.3851, RMSE train = 5.9547, RMSE Kaggle = 6.0280
+- **Random Forest** : RMSE CV = 6.2370, RMSE train = 2.6276 (overfitting), RMSE Kaggle = 6.4695
+- **Conclusion** : PCR généralise mieux malgré un RMSE CV légèrement inférieur à RF → les relations dans les données sont majoritairement linéaires
+- **Soumission finale** : PCR (RMSE Kaggle = 6.0280)
